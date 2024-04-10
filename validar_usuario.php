@@ -3,8 +3,8 @@ include 'basededatos.php';
 $usu_usuario = $_POST['usuario'];
 $usu_contraseña = $_POST['clave']; 
 
-//$usu_usuario = "Johan Andres Linares Ovalle";
-//$usu_contraseña="1013103130";
+//$usu_usuario = "Santiago";
+//$usu_contraseña="123";
 
 $sentencia = $conexion->prepare("SELECT * FROM usuarios WHERE usu_usuario=? AND usu_clave=?");
 $sentencia->bind_param('ss', $usu_usuario, $usu_contraseña);    
