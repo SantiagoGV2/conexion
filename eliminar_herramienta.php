@@ -9,12 +9,12 @@ $her_cod = $_POST['her_cod'];
 $sql = "DELETE FROM herramientas WHERE her_cod = '$her_cod'";
 
 // Ejecutar la query
-if ($conn->query($sql) === TRUE) {
+if ($conexion->query($sql) === TRUE) {
     echo "Datos eliminados correctamente";
 } else {
     echo "Error al eliminar los datos: " . mysqli_error($conexion);
 }
 
 // Cerrar conexión
-$conn->close();
+$conexion->close();
 ?>

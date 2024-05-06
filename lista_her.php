@@ -1,15 +1,19 @@
 <?php
 include "basededatos.php";
 
-// Sanitizar la entrada del usuario
-$cedulaEmpleado = mysqli_real_escape_string($conexion, $_POST["emple_cedula"]);
+if (!$conexion) {
+    die("Error: No se pudo conectar a la base de datos.");
+}
 
-// Consulta preparada para seleccionar los datos de la tabla herramientas
-$consulta = "SELECT herramientas.her_cod, herramientas.her_descripcion, herramientas.her_estado, herramientas.her_fecha_entrega, herramientas.her_fecha_devolucion, herramientas.her_observacion, herramientas.emple_cedula FROM herramientas WHERE herramientas.emple_cedula = herramientas.emple_cedula;";
+// Consulta preparada para seleccionar todos los datos de la tabla herramientas
+$consulta = "SELECT her_cod, her_descripcion, her_estado, her_fecha_entrega, her_fecha_devolucion, her_observacion, her_fecha_expedicion, her_fecha_vencimiento, emple_cedula FROM herramientas";
 
 // Preparar la consulta
 $statement = mysqli_prepare($conexion, $consulta);
-mysqli_stmt_bind_param($statement, 's', $cedulaEmpleado);
+
+if (!$statement) {
+    die("Error al preparar la consulta: " . mysqli_error($conexion));
+}
 
 // Ejecutar la consulta
 mysqli_stmt_execute($statement);
@@ -32,3 +36,4 @@ echo json_encode($herramientas);
 mysqli_stmt_close($statement);
 mysqli_close($conexion);
 ?>
+
